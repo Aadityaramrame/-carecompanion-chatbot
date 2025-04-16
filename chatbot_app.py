@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from chatbot_function import get_chatbot_response  # update if your function/class is different
+from chatbot_function import get_response  # update if your function/class is different
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ def chat():
         return jsonify({"error": "Missing 'text' in request"}), 400
 
     try:
-        response = get_chatbot_response(user_input)  # Call your chatbot logic
+        response = get_response(user_input)  # Call your chatbot logic
         return jsonify({"response": response})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
