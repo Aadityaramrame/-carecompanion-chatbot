@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: carecompanion-chatbot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python chatbot_app.py
+    envVars:
+      - key: PORT
+        value: 10000
+    plan: free
