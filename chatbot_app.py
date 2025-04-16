@@ -1,7 +1,11 @@
 from flask import Flask, request, jsonify
-from chatbot_function import get_response  # update if your function/class is different
+from chatbot_functions import DataProcessor, Chatbot  # Correct import
 
 app = Flask(__name__)
+
+# Initialize chatbot once
+data_processor = DataProcessor()
+chatbot = Chatbot(data_processor)
 
 @app.route('/')
 def home():
@@ -16,8 +20,12 @@ def chat():
         return jsonify({"error": "Missing 'text' in request"}), 400
 
     try:
-        response = get_response(user_input)  # Call your chatbot logic
-        return jsonify({"response": response})
+        matched_question, response, source = chatbot.get_response(user_input)
+        return jsonify({
+            "matched_question": matched_question,
+            "response": response,
+            "source": source
+        })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
