@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from chatbot_functions import get_chatbot_response  # update if your function/class is different
+from chatbot_function import get_chatbot_response  # update if your function/class is different
 
 app = Flask(__name__)
 
